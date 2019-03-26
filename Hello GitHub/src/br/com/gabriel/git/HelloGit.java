@@ -12,7 +12,7 @@ public class HelloGit {
 	public static void main(String[] args) {
 		System.out.println("Hello Git!");
 		System.out.println("Dizem que sou lindo mas lindo nao posso ser,"
-				+ " o lindo e bonito, e bonito nao consigo ser");
+				+ " o lindo e bonito, e bonito nao consigoasaaaSASASASASASASASSASAASAS ser");
 		
 	}
 
