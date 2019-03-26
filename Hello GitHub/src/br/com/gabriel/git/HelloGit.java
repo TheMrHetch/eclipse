@@ -14,6 +14,11 @@ public class HelloGit {
 		System.out.println("Dizem que sou lindo mas lindo nao posso ser,"
 				+ " o lindo e bonito, e bonito nao consigoasaaaSASASASASASASASSASAASAS ser");
 		
+		
+	}
+	
+	private static void naoMain(String argo) {
+		System.out.println(argo);
 	}
 
 }
