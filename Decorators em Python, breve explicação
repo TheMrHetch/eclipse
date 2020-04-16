@@ -1,0 +1,920 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "name": "Decorators.ipynb",
+      "provenance": [],
+      "collapsed_sections": [
+        "Fg_gnV3JXEZ6",
+        "oYaCpRpAfQLQ",
+        "dxobdyS1fSl4",
+        "wJFzkGGDbOHI"
+      ],
+      "authorship_tag": "ABX9TyPGlpe97vn3reRhaZ0n+giT",
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/gomesgr/eclipse/blob/master/Decorators%20em%20Python%2C%20breve%20explica%C3%A7%C3%A3o\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "TXWS72c-WiVG",
+        "colab_type": "code",
+        "colab": {}
+      },
+      "source": [
+        ""
+      ],
+      "execution_count": 0,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "w0zFwtdcWppx",
+        "colab_type": "text"
+      },
+      "source": [
+        "# **Funções**\n",
+        "Exemplo de uma simples função em Python"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "oERST4MGWvdE",
+        "colab_type": "code",
+        "colab": {}
+      },
+      "source": [
+        "def soma(x, y=10):\n",
+        "  return x + y"
+      ],
+      "execution_count": 0,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "0OBd2L0zW28Z",
+        "colab_type": "code",
+        "outputId": "35915b0d-4302-47b5-fa59-dacfa63e8577",
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 36
+        }
+      },
+      "source": [
+        "soma(10)"
+      ],
+      "execution_count": 0,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "20"
+            ]
+          },
+          "metadata": {
+            "tags": []
+          },
+          "execution_count": 3
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "ccWXmQKeW6f5",
+        "colab_type": "code",
+        "outputId": "9fd0c854-8f09-42c3-c05a-b66b70cfc55d",
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 36
+        }
+      },
+      "source": [
+        "soma(10, 20)"
+      ],
+      "execution_count": 0,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "30"
+            ]
+          },
+          "metadata": {
+            "tags": []
+          },
+          "execution_count": 4
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "Fg_gnV3JXEZ6",
+        "colab_type": "text"
+      },
+      "source": [
+        "## Funções são objetos de **primeira classe**\n",
+        "Ou seja, funções podem ser passadas como argumentos em outras funções"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "-kOsZsxcXSj5",
+        "colab_type": "code",
+        "colab": {}
+      },
+      "source": [
+        "def gritar(texto):\n",
+        "    return texto.upper()\n",
+        "def susurrar(texto):    \n",
+        "    return texto.lower()\n",
+        "def cumprimentar(func):\n",
+        "    cumprimentando = func('Olá, Tudo Bem?')\n",
+        "    print(cumprimentando)\n",
+        "  "
+      ],
+      "execution_count": 0,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "oP8Z2Q5uXgMw",
+        "colab_type": "code",
+        "outputId": "08eca145-5930-4316-de05-23c8748d78ec",
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 36
+        }
+      },
+      "source": [
+        "cumprimentar(gritar)"
+      ],
+      "execution_count": 0,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "text": [
+            "OLÁ, TUDO BEM?\n"
+          ],
+          "name": "stdout"
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "jGu0ofulnSQp",
+        "colab_type": "code",
+        "outputId": "232b691e-cc43-4696-ac5f-602fd7cf42eb",
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 36
+        }
+      },
+      "source": [
+        "cumprimentar(susurrar)"
+      ],
+      "execution_count": 0,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "text": [
+            "olá, tudo bem?\n"
+          ],
+          "name": "stdout"
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "FWb71vuNYump",
+        "colab_type": "text"
+      },
+      "source": [
+        "Perceba que foi chamado a função cumprimentar e foi passado como argumento as duas outras funções `gritar` e `susurrar`, modificando assim a saída"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "VLQZyriYaRHn",
+        "colab_type": "text"
+      },
+      "source": [
+        "# **Decorators**\n",
+        "*Decorator são métodos que executam funções modificando seu comportamento*\n"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "oYaCpRpAfQLQ",
+        "colab_type": "text"
+      },
+      "source": [
+        "## Exemplo de decorator utilizando uma função de soma\n",
+        "Como criar um decorator? \n",
+        "Existem 2 maneiras."
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "dxobdyS1fSl4",
+        "colab_type": "text"
+      },
+      "source": [
+        "### Maneira 1 (recomendada)\n",
+        "Criaremos abaixo um decorator de nome `decorator` porém pode-se usar qualquer nome.\n",
+        "Utilizando a marcação @decorator acima da função que queremos \"decorar\""
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "i3kDbKuWaanR",
+        "colab_type": "code",
+        "colab": {}
+      },
+      "source": [
+        "def decorator(funcao):\n",
+        "  def wrapper(*args, **kwargs):\n",
+        "    print('Entrou no wrapper')\n",
+        "    rv = funcao(*args, **kwargs)\n",
+        "    print('Saindo do wrapper')\n",
+        "    return rv\n",
+        "  return wrapper"
+      ],
+      "execution_count": 0,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "mmr5SCDpasRp",
+        "colab_type": "code",
+        "colab": {}
+      },
+      "source": [
+        "@decorator\n",
+        "def soma(x, y):\n",
+        "  return x + y\n"
+      ],
+      "execution_count": 0,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "1iPPjl6Va7jA",
+        "colab_type": "code",
+        "outputId": "cac59f08-c937-4edf-b089-28da59d9ff71",
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 73
+        }
+      },
+      "source": [
+        "soma(1, 2)"
+      ],
+      "execution_count": 0,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "text": [
+            "Entrou no wrapper\n",
+            "Saindo do wrapper\n"
+          ],
+          "name": "stdout"
+        },
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "3"
+            ]
+          },
+          "metadata": {
+            "tags": []
+          },
+          "execution_count": 32
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "wJFzkGGDbOHI",
+        "colab_type": "text"
+      },
+      "source": [
+        "### Maneira 2\n",
+        "Criaremos abaixo o mesmo método `decorator`. Utilizando a criação de um método para chamá-lo novamente."
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "FzXahL1XbUQY",
+        "colab_type": "code",
+        "colab": {}
+      },
+      "source": [
+        "def decorator(funcao):\n",
+        "  def wrapper(*args, **kwargs):\n",
+        "    print('Entrou no wrapper')\n",
+        "    rv = funcao(*args, **kwargs)\n",
+        "    print('Saindo do wrapper')\n",
+        "    return rv\n",
+        "  return wrapper"
+      ],
+      "execution_count": 0,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "JBaRAy0JbVGQ",
+        "colab_type": "code",
+        "colab": {}
+      },
+      "source": [
+        "def soma(x, y):\n",
+        "  return x + y\n"
+      ],
+      "execution_count": 0,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "dCctD3uwbXdZ",
+        "colab_type": "code",
+        "outputId": "1b14820d-e947-441a-bb80-d942d641f6ec",
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 73
+        }
+      },
+      "source": [
+        "decorator = decorator(soma)\n",
+        "decorator(1, 2)"
+      ],
+      "execution_count": 0,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "text": [
+            "Entrou no wrapper\n",
+            "Saindo do wrapper\n"
+          ],
+          "name": "stdout"
+        },
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "3"
+            ]
+          },
+          "metadata": {
+            "tags": []
+          },
+          "execution_count": 36
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "K4lxABh3bmNx",
+        "colab_type": "text"
+      },
+      "source": [
+        "Dessa forma é possível com que criemos diversas formas de interconectar funções sem precisar modificar o código-fonte inteiro"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "9a1XS_u9b5r4",
+        "colab_type": "text"
+      },
+      "source": [
+        "## Exemplo calculando o tempo levado para executar uma função\n",
+        "Para exemplificar, criaremos uma classe `Calculadora` para armazenar nossos métodos de cálculos `soma`, `sub` e `mult`"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "IawmjN7WgANI",
+        "colab_type": "text"
+      },
+      "source": [
+        "### Maneira ruim"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "BMBF6fdUb0P3",
+        "colab_type": "code",
+        "colab": {}
+      },
+      "source": [
+        "class Calculadora:\n",
+        "  def soma(self, x, y):\n",
+        "    return x + y\n",
+        "  def sub(self, x, y):\n",
+        "    return x - y\n",
+        "  def mult(self, x, y):\n",
+        "    return x * y"
+      ],
+      "execution_count": 0,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "6fAk2S4wcLG5",
+        "colab_type": "code",
+        "colab": {}
+      },
+      "source": [
+        "from time import time\n",
+        "calc = Calculadora()"
+      ],
+      "execution_count": 0,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "7taengLFhFI3",
+        "colab_type": "text"
+      },
+      "source": [
+        "Acima importamos do módulo `time` a função `time` que retorna um *Epoch*"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "8JU955JncQX4",
+        "colab_type": "code",
+        "outputId": "86016eb1-3337-4f4f-c2fc-c37e42f53092",
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 54
+        }
+      },
+      "source": [
+        "antes = time()\n",
+        "print(f'calc.soma(1,2) = {calc.soma(1, 2)}')\n",
+        "depois = time()\n",
+        "print(f'Tempo: {depois-antes:.4f}s')\n"
+      ],
+      "execution_count": 0,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "text": [
+            "calc.soma(1,2) = 3\n",
+            "Tempo: 0.0001s\n"
+          ],
+          "name": "stdout"
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "mrZ8zosrcRRE",
+        "colab_type": "code",
+        "outputId": "96e0a2de-f70d-49b6-f83a-9f4d7fc1cf2b",
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 54
+        }
+      },
+      "source": [
+        "antes = time()\n",
+        "print(f'calc.sub(2, 1) = {calc.sub(2, 1)}')\n",
+        "depois = time()\n",
+        "print(f'Tempo: {depois-antes:.4f}s')"
+      ],
+      "execution_count": 0,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "text": [
+            "calc.sub(2, 1) = 1\n",
+            "Tempo: 0.0004s\n"
+          ],
+          "name": "stdout"
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "NWbKHsuScfAs",
+        "colab_type": "code",
+        "outputId": "aaab335d-1766-407b-e66e-9e96d152b1d7",
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 54
+        }
+      },
+      "source": [
+        "antes = time()\n",
+        "print(f'calc.mult(2, 3) = {calc.mult(2, 3)}')\n",
+        "depois = time()\n",
+        "print(f'Tempo: {depois-antes:.4f}s')"
+      ],
+      "execution_count": 0,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "text": [
+            "calc.mult(2, 3) = 6\n",
+            "Tempo: 0.0001s\n"
+          ],
+          "name": "stdout"
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "0-xWhwxzhtp4",
+        "colab_type": "text"
+      },
+      "source": [
+        "Perceba como foi necessário receber o tempo em cada chamada de função manualmente"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "xvVsjY7ke5Ff",
+        "colab_type": "text"
+      },
+      "source": [
+        "### Maneira Boa"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "e6Zbsei2dSXJ",
+        "colab_type": "text"
+      },
+      "source": [
+        "Isso faz com que muito código deva ser escrito. Para cada chamada de método da classe calculadora, eu manualmente devo criar um temporizador. Isso muda e facilita demais a vida do programador com **decorators**"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "hlhRbnRLdsOX",
+        "colab_type": "text"
+      },
+      "source": [
+        "**Decorator** chamado `executar` possui um *wrapper* que vai cuidar da chamada do método.\n",
+        "*Wrapper* neste caso vai possuir três argumentos, porém pode-se utilizar de `*args` e `**kwargs` caso queira utilizar o mesmo decorator, ou seja, calcular o tempo de execução de uma função ou método."
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "OevvOvMXdel_",
+        "colab_type": "code",
+        "colab": {}
+      },
+      "source": [
+        "from time import time\n",
+        "def executar(fun):\n",
+        "    def wrapper(obj, x, y):\n",
+        "        antes = time()\n",
+        "        # rv = return_value\n",
+        "        rv = fun(obj, x, y)\n",
+        "        depois = time()\n",
+        "        print(f'Tempo: {depois-antes:.10f}s')\n",
+        "        return rv\n",
+        "    return wrapper"
+      ],
+      "execution_count": 0,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "CkWezQPmiC2X",
+        "colab_type": "text"
+      },
+      "source": [
+        "Criaremos a mesma classe Calculadora, porém agora com os marcadores de `@decorator` para cada método\n",
+        "\n"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "f0QWpbCpiCLG",
+        "colab_type": "code",
+        "colab": {}
+      },
+      "source": [
+        "class Calculadora:\n",
+        "    @executar\n",
+        "    def soma(self, x, y):\n",
+        "        return x + y\n",
+        "    @executar\n",
+        "    def sub(self, x, y):\n",
+        "        return x - y\n",
+        "    @executar\n",
+        "    def mult(self, x, y):\n",
+        "      return x * y"
+      ],
+      "execution_count": 0,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "4q1U1pJxez9n",
+        "colab_type": "code",
+        "colab": {}
+      },
+      "source": [
+        "calc = Calculadora()"
+      ],
+      "execution_count": 0,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "4keJyxkIj1Sf",
+        "colab_type": "code",
+        "outputId": "8bcb942f-9da6-4fc1-f778-f8382bd1f85b",
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 54
+        }
+      },
+      "source": [
+        "print(f'calc.soma(1, 2) = {calc.soma(1, 2)}')"
+      ],
+      "execution_count": 0,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "text": [
+            "Tempo: 0.0000011921s\n",
+            "calc.soma(1, 2) = 3\n"
+          ],
+          "name": "stdout"
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "1MXmsZz7j5RH",
+        "colab_type": "code",
+        "outputId": "513da202-4317-4c6f-a442-38478895c80e",
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 54
+        }
+      },
+      "source": [
+        "print(f'calc.sub(2, 1) = {calc.sub(2, 1)}')"
+      ],
+      "execution_count": 0,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "text": [
+            "Tempo: 0.0000007153s\n",
+            "calc.sub(2, 1) = 1\n"
+          ],
+          "name": "stdout"
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "HG0J0-Fej6se",
+        "colab_type": "code",
+        "outputId": "3c61299f-77c1-437f-e58d-0d97fa4191e0",
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 54
+        }
+      },
+      "source": [
+        "print(f'calc.mult(2, 3) = {calc.mult(2, 3)}')"
+      ],
+      "execution_count": 0,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "text": [
+            "Tempo: 0.0000009537s\n",
+            "calc.mult(2, 3) = 6\n"
+          ],
+          "name": "stdout"
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "2j2LM8jKkuje",
+        "colab_type": "text"
+      },
+      "source": [
+        "### Realizar n vezes o cálculo\n",
+        "Caso também fosse necessário que eu fizesse n vezes estes cálculos, criaria mais uma função. Para demonstrar, agora utilizando `*args` e `**kwargs`"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "PPvQCY2VlHvI",
+        "colab_type": "code",
+        "colab": {}
+      },
+      "source": [
+        "from time import time\n",
+        "def nvezes(n):\n",
+        "    def executar(fun):\n",
+        "        def wrapper(*args, **kwargs):\n",
+        "            antes = time()\n",
+        "            # rv = return_value\n",
+        "            for i in range(n): \n",
+        "                print(f'Volta: {i}')\n",
+        "                rv = fun(*args, **kwargs)\n",
+        "            depois = time()\n",
+        "            print(f'Tempo: {depois-antes:.10f}s')\n",
+        "            return rv\n",
+        "        return wrapper\n",
+        "    return executar"
+      ],
+      "execution_count": 0,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "bBPoAIZ_lfx7",
+        "colab_type": "code",
+        "colab": {}
+      },
+      "source": [
+        "class Calculadora:\n",
+        "    @nvezes(2)\n",
+        "    def soma(self, x, y):\n",
+        "        return x + y\n",
+        "    @nvezes(3)\n",
+        "    def sub(self, x, y):\n",
+        "        return x - y\n",
+        "    @nvezes(4)\n",
+        "    def mult(self, x, y):\n",
+        "      return x * y"
+      ],
+      "execution_count": 0,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "wHJYwiszllr3",
+        "colab_type": "code",
+        "colab": {}
+      },
+      "source": [
+        "calc = Calculadora()"
+      ],
+      "execution_count": 0,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "95eV_8AZln89",
+        "colab_type": "code",
+        "outputId": "50eaae38-b471-41f0-d03e-a9b75f952df8",
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 92
+        }
+      },
+      "source": [
+        "print(f'calc.soma(1, 2) = {calc.soma(1, 2)}')"
+      ],
+      "execution_count": 0,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "text": [
+            "Volta: 0\n",
+            "Volta: 1\n",
+            "Tempo: 0.0001838207s\n",
+            "calc.soma(1, 2) = 3\n"
+          ],
+          "name": "stdout"
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "lGNkDMBNl_xm",
+        "colab_type": "code",
+        "outputId": "f448d345-e1ce-491f-80fe-7991b41eee07",
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 111
+        }
+      },
+      "source": [
+        "print(f'calc.sub(2, 1) = {calc.sub(2, 1)}')"
+      ],
+      "execution_count": 0,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "text": [
+            "Volta: 0\n",
+            "Volta: 1\n",
+            "Volta: 2\n",
+            "Tempo: 0.0002202988s\n",
+            "calc.sub(2, 1) = 1\n"
+          ],
+          "name": "stdout"
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "AyQ8082XmCCW",
+        "colab_type": "code",
+        "outputId": "69c8f166-ac73-4e35-d322-e935eca9b61a",
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 129
+        }
+      },
+      "source": [
+        "print(f'calc.mult(2, 3) = {calc.mult(2, 3)}')"
+      ],
+      "execution_count": 0,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "text": [
+            "Volta: 0\n",
+            "Volta: 1\n",
+            "Volta: 2\n",
+            "Volta: 3\n",
+            "Tempo: 0.0001285076s\n",
+            "calc.mult(2, 3) = 6\n"
+          ],
+          "name": "stdout"
+        }
+      ]
+    }
+  ]
+}
